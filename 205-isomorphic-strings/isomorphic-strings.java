@@ -2,28 +2,20 @@ import java.util.HashMap;
 
 class Solution {
     public boolean isIsomorphic(String s, String t) {
-        if (s.length() != t.length()) {
+        if(s.length()!=t.length()){
             return false;
         }
-        HashMap<Character, Character> mapST = new HashMap<>();
-        HashMap<Character, Character> mapTS = new HashMap<>();
-        for (int i = 0; i < s.length(); i++) {
-            char chS = s.charAt(i);
-            char chT = t.charAt(i);
-            if(mapST.containsKey(chS)) {
-                if(mapST.get(chS) != chT) {
-                    return false;
-                }
-            }else{
-                mapST.put(chS, chT);
+        int[] mapS= new int[256];
+        int[] mapT=new int[256];
+
+        for(int i=0; i<s.length(); i++){
+            char c1= s.charAt(i);
+            char c2=t.charAt(i);
+            if(mapS[c1]!=mapT[c2]){
+                return false;
             }
-            if(mapTS.containsKey(chT)) {
-                if(mapTS.get(chT)!=chS) {
-                    return false;
-                }
-            }else{
-                mapTS.put(chT, chS);
-            }
+            mapS[c1]=i+1;
+            mapT[c2]=i+1;
         }
         return true;
     }
